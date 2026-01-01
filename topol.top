@@ -1,0 +1,34 @@
+; Topology file for Phytic Acid in Water
+; CHARMM36 force field with TIP3P water
+
+; Include force field parameters
+#include "charmm36-jul2022.ff/forcefield.itp"
+
+; Include phytic acid topology
+#include "phytic_acid.itp"
+
+; Include position restraints
+#ifdef POSRES
+#include "posre.itp"
+#endif
+
+; Include water topology
+#include "charmm36-jul2022.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "charmm36-jul2022.ff/ions.itp"
+
+[ system ]
+; Name
+Phytic acid in water at pH 7.4
+
+[ molecules ]
+; Compound        #mols
+IP6                 1

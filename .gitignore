@@ -1,0 +1,84 @@
+# Gromacs simulation output files
+*.gro
+*.tpr
+*.trr
+*.xtc
+*.edr
+*.log
+*.cpt
+*.xvg
+*.ndx
+*.pdb~
+*.itp~
+*.top~
+
+# Energy minimization outputs (exclude .mdp input files)
+em.gro
+em.tpr
+em.trr
+em.xtc
+em.edr
+em.log
+em.cpt
+ions.*
+boxed.*
+solvated.*
+ionized.*
+
+# Equilibration outputs (exclude .mdp input files)
+nvt.gro
+nvt.tpr
+nvt.trr
+nvt.xtc
+nvt.edr
+nvt.log
+nvt.cpt
+
+npt.gro
+npt.tpr
+npt.trr
+npt.xtc
+npt.edr
+npt.log
+npt.cpt
+
+# Production MD outputs (exclude .mdp input files)
+md.gro
+md.tpr
+md.trr
+md.xtc
+md.edr
+md.log
+md.cpt
+md_*.tpr
+md_*.xtc
+md_*.log
+
+# Backup files
+\#*\#
+*~
+.*.swp
+
+# Analysis directory
+analysis/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Visualization outputs
+*.png
+*.pdf
+*.eps
+*.jpg
+
+# Logs
+nohup.out
+*.out
+
+# macOS
+.DS_Store
+
+# Force field directory (download separately)
+charmm36*.ff/
