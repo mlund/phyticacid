@@ -33,3 +33,4 @@ __pycache__/
 
 # Standard CHARMM36 force field (download separately)
 charmm36-jul2022.ff/
+charmm36_phytic_params.itp
