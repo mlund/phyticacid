@@ -2,6 +2,39 @@
 
 This directory contains a complete setup for running a **Gromacs MD simulation** of **phytic acid** (myo-inositol hexakisphosphate, IP6) in water using the **CHARMM36 force field**.
 
+## Current Status
+
+✅ **Simulation is FULLY SET UP and EQUILIBRATED** - Ready to run production MD!
+
+The system has been:
+- ✅ Solvated in TIP3P water (2,151 molecules)
+- ✅ Neutralized with ions (16 Na⁺, 6 Cl⁻) at 0.15 M concentration
+- ✅ Energy minimized (converged in 374 steps)
+- ✅ NVT equilibrated (100 ps at 300 K)
+- ✅ NPT equilibrated (100 ps at 1 bar)
+- ✅ Production MD prepared (`md.tpr` ready to execute)
+
+### Quick Start - Resume Simulation
+
+If you're coming back to this project:
+
+```bash
+cd /path/to/claude_phytic_acid_md
+
+# If force field directory is missing, download it first:
+./download_charmm36.sh
+
+# Run the 10 ns production simulation
+gmx mdrun -v -deffnm md
+
+# Or run in background
+nohup gmx mdrun -v -deffnm md > md_run.log 2>&1 &
+```
+
+**Estimated time**: 2-4 hours (CPU) or 30-60 minutes (with GPU)
+
+All equilibration files (`em.gro`, `nvt.gro`, `npt.gro`, checkpoint files) are preserved on disk.
+
 ## System Details
 
 - **Molecule**: Phytic acid (IP6)
@@ -44,17 +77,45 @@ O=P([O-])([O-])O[C@H]1[C@@H](OP(=O)([O-])[O-])[C@H](OP(=O)([O-])O)[C@@H](OP(=O)(
 - 2 phosphate groups singly deprotonated: `P(=O)([O-])O` (charge -1 each)
 - Total charge: 4×(-2) + 2×(-1) = -10
 
+## Repository Information
+
+This project is version-controlled with git: **git@github.com:mlund/phyticacid.git**
+
+**Files tracked in git** (setup files):
+- Structure files: `phytic_acid.pdb`, `phytic_acid.itp`, `posre.itp`
+- Force field: `charmm36_phytic.itp`, `charmm36_phytic_minimal.itp`
+- Parameters: `*.mdp` files (em, nvt, npt, md)
+- Topology: `topol.top`
+- Scripts: `setup_simulation.sh`, `analysis.sh`, `verify_structure.py`, etc.
+- Documentation: `README.md`, `QUICKSTART.md`, `SIMULATION_NOTES.md`
+
+**Files ignored** (simulation outputs via `.gitignore`):
+- Trajectory files: `*.gro`, `*.xtc`, `*.trr`
+- Binary files: `*.tpr`, `*.edr`, `*.cpt`
+- Logs: `*.log`
+- Force field directory: `charmm36-jul2022.ff/` (13 MB, re-download with `./download_charmm36.sh`)
+- Temporary files: `#*#`, `mdout.mdp`, `output.pdb`
+
+To push your changes:
+```bash
+git push
+```
+
 ## File Descriptions
 
 ```
 phytic_acid.pdb       - Initial structure (deprotonated at pH 7.4)
+phytic_acid.itp       - CHARMM36 molecule topology from CHARMM-GUI
+charmm36_phytic.itp   - CHARMM-GUI force field parameters
+topol.top             - Main system topology
 em.mdp                - Energy minimization parameters
 nvt.mdp               - NVT equilibration parameters (100 ps)
 npt.mdp               - NPT equilibration parameters (100 ps)
 md.mdp                - Production MD parameters (10 ns)
 posre.itp             - Position restraints for equilibration
-setup_simulation.sh   - Automated setup script
+setup_simulation.sh   - Automated setup script (already run)
 analysis.sh           - Post-simulation analysis script
+download_charmm36.sh  - Download standard CHARMM36 force field
 ```
 
 ## Prerequisites
@@ -66,9 +127,18 @@ analysis.sh           - Post-simulation analysis script
 
 2. **CHARMM36 Force Field** topology files for phytic acid
 
-## Step 1: Generate Topology Files (CHARMM-GUI)
+## Setup Steps (Already Completed)
 
-Since phytic acid is not a standard molecule, you need to generate topology files using **CHARMM-GUI**:
+The following steps have already been completed for this simulation:
+
+### Step 1: Generate Topology Files (CHARMM-GUI) ✅ DONE
+
+The topology files have been generated using **CHARMM-GUI** and are included:
+- `phytic_acid.itp` - Molecule topology from CHARMM-GUI
+- `charmm36_phytic.itp` - CHARMM-GUI force field parameters
+- `topol.top` - Main topology file
+
+**For reference**, if you needed to regenerate these files:
 
 ### Option A: CHARMM-GUI (Recommended)
 
@@ -133,25 +203,26 @@ IP6                 1
 ; SOL and ions will be added by setup script
 ```
 
-## Step 2: Run the Setup Script
+### Step 2: Run the Setup Script ✅ DONE
 
-Once you have the topology files, run the automated setup:
+The automated setup has been completed. The script performed:
+1. ✅ Created a 4 nm cubic simulation box
+2. ✅ Solvated with TIP3P water (2,151 water molecules)
+3. ✅ Added Na⁺ and Cl⁻ ions (16 Na+, 6 Cl-, neutralized + 0.15 M)
+4. ✅ Energy minimization (converged in 374 steps, Fmax < 1000 kJ/mol/nm)
+5. ✅ NVT equilibration (100 ps at 300 K, ~2.5 min runtime)
+6. ✅ NPT equilibration (100 ps at 1 bar, ~2.7 min runtime)
+7. ✅ Production MD prepared (`md.tpr` file ready)
 
+All equilibration files are saved on disk (not in git due to `.gitignore`).
+
+**To re-run setup** (if needed):
 ```bash
 chmod +x setup_simulation.sh
 ./setup_simulation.sh
 ```
 
-This script will:
-1. Create a 4 nm cubic simulation box
-2. Solvate with TIP3P water (~2000 water molecules)
-3. Add Na⁺ and Cl⁻ ions (neutralize + 0.15 M)
-4. Run energy minimization (~50,000 steps)
-5. Run NVT equilibration (100 ps at 300 K)
-6. Run NPT equilibration (100 ps at 1 bar)
-7. Prepare production MD (10 ns)
-
-## Step 3: Run Production MD
+## Step 3: Run Production MD (NEXT STEP)
 
 After setup completes successfully:
 
