@@ -51,8 +51,5 @@ tau_p           = 2.0                  ; Time constant (ps)
 ref_p           = 1.0                  ; Reference pressure (bar)
 compressibility = 4.5e-5               ; Isothermal compressibility of water
 
-; Periodic boundary conditions
-pbc         = xyz
-
 ; Velocity generation
 gen_vel     = no            ; Use velocities from NVT

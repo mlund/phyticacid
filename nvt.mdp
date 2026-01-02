@@ -47,9 +47,6 @@ ref_t       = 300                       ; Reference temperature (K)
 ; Pressure coupling
 pcoupl      = no            ; No pressure coupling in NVT
 
-; Periodic boundary conditions
-pbc         = xyz           ; 3D PBC
-
 ; Velocity generation
 gen_vel     = yes           ; Generate velocities from Maxwell distribution
 gen_temp    = 300           ; Temperature for Maxwell distribution
