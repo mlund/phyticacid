@@ -25,6 +25,25 @@ At **physiological pH (~7.4)**, phytic acid is **mostly deprotonated** with the 
 
 The provided PDB structure represents this physiologically relevant, deprotonated form.
 
+### SMILES Representation
+
+**Deprotonated form (pH 7.4, -10 charge):**
+```
+[C@@H]1([C@@H]([C@@H]([C@@H]([C@H]([C@@H]1OP(=O)([O-])[O-])OP(=O)([O-])O)OP(=O)([O-])[O-])OP(=O)([O-])[O-])OP(=O)([O-])[O-])OP(=O)([O-])O
+```
+
+**Canonical SMILES:**
+```
+O=P([O-])([O-])O[C@H]1[C@@H](OP(=O)([O-])[O-])[C@H](OP(=O)([O-])O)[C@@H](OP(=O)([O-])[O-])[C@H](OP(=O)([O-])O)[C@H]1OP(=O)([O-])[O-]
+```
+
+**Molecular composition:** C₆H₈O₂₄P₆ (649.950 g/mol, -10 charge)
+
+**Protonation details:**
+- 4 phosphate groups doubly deprotonated: `P(=O)([O-])[O-]` (charge -2 each)
+- 2 phosphate groups singly deprotonated: `P(=O)([O-])O` (charge -1 each)
+- Total charge: 4×(-2) + 2×(-1) = -10
+
 ## File Descriptions
 
 ```
